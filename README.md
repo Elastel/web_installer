@@ -7,4 +7,4 @@ $chmod +x install.sh
 
 $sudo ./install.sh 
 
-notice: Enter Y when Y/N appears during the installation process
+Notice: Enter Y when Y/N appears during the installation process
