@@ -1,4 +1,4 @@
-# Install step
+# Webgui installation  steps
 $git clone https://github.com/Elastel/web_installer.git
 
 $cd web_installer 
