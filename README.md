@@ -1,7 +1,7 @@
 # web_installer
 web installer for Elastel
 
-#install step
+# install step
 $git clone https://github.com/Elastel/web_installer.git 
 $cd web_installer 
 $chmod +x install.sh 
