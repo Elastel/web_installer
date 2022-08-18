@@ -1,4 +1,4 @@
-# install step
+# Install step
 $git clone https://github.com/Elastel/web_installer.git
 
 $cd web_installer 
