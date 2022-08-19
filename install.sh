@@ -11,9 +11,9 @@ echo model:$model
 echo -e "\r\nInstalling Dependency Packages..."
 sudo apt-get update
 sudo apt-get full-upgrade
-sudo apt-get install lighttpd git hostapd dnsmasq iptables-persistent vnstat qrencode php7.4-cgi libmosquitto-dev libsqlite3-dev libcurl4-openssl-dev ifmetric
+sudo apt-get install lighttpd git hostapd dnsmasq iptables-persistent vnstat qrencode php7.4-cgi libmosquitto-dev libsqlite3-dev libcurl4-openssl-dev libjson-c-dev ifmetric
 
-echo -e "Check packages..."
+echo -e "\r\nCheck packages..."
 arr=(lighttpd git hostapd dnsmasq iptables-persistent vnstat qrencode php7.4-cgi libmosquitto-dev libsqlite3-dev libcurl4-openssl-dev ifmetric)
 count=0
 
@@ -41,6 +41,12 @@ sudo systemctl restart lighttpd.service
 echo -e "Create web APP..."
 sudo rm -rf /var/www/html
 sudo git clone https://github.com/Elastel/webgui /var/www/html
+
+htmlPath="/var/www/html"
+if [ ! -d "$htmlPath" ]; then
+	echo -e "\r\n\e[31mWarnnning:\e[0mThe Web app fails to be downloaded. Check the network or run install.sh again."
+	exit 0
+fi
 
 sleep 1
 
@@ -93,6 +99,7 @@ sudo ln -s /etc/init.d/daemon /etc/rc5.d/S10daemon
 sudo cp EG/$model/sbin/* /sbin/
 sudo cp EG/$model/usr/sbin/* /usr/sbin/
 sudo cp EG/$model/usr/lib/* /usr/lib/
+sudo cp EG/$model/usr/local/bin/* /usr/local/bin/
 sudo systemctl stop systemd-networkd
 sudo systemctl disable systemd-networkd
 sudo cp config/raspap-bridge-br0.netdev /etc/systemd/network/raspap-bridge-br0.netdev
