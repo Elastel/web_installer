@@ -42,11 +42,15 @@ echo -e "Create web APP..."
 sudo rm -rf /var/www/html
 sudo git clone https://github.com/Elastel/webgui /var/www/html
 
+sleep 1
+
+cd /var/www/html
 sudo cp config/50-raspap-router.conf /etc/lighttpd/conf-available/
 sudo ln -s /etc/lighttpd/conf-available/50-raspap-router.conf /etc/lighttpd/conf-enabled/50-raspap-router.conf
 sudo systemctl restart lighttpd.service
-cd /var/www/html
 sudo cp config/090_raspap /etc/sudoers.d/090_raspap
+
+sleep 1
 
 sudo mkdir /etc/raspap/
 sudo mkdir /etc/raspap/backups
@@ -54,16 +58,16 @@ sudo mkdir /etc/raspap/networking
 sudo mkdir /etc/raspap/hostapd
 sudo mkdir /etc/raspap/lighttpd
 sudo mkdir /etc/config
-sudo cp raspap.php /etc/raspap 
+sudo cp raspap.php /etc/raspap
 sudo chown -R www-data:www-data /var/www/html
 sudo chown -R www-data:www-data /etc/raspap
 
 sleep 1
 
-sudo cp installers/*log.sh /etc/raspap/hostapd 
+sudo cp installers/*log.sh /etc/raspap/hostapd
 sudo cp installers/service*.sh /etc/raspap/hostapd
-sudo chown -c root:www-data /etc/raspap/hostapd/*.sh 
-sudo chmod 750 /etc/raspap/hostapd/*.sh 
+sudo chown -c root:www-data /etc/raspap/hostapd/*.sh
+sudo chmod 750 /etc/raspap/hostapd/*.sh
 sudo cp installers/configport.sh /etc/raspap/lighttpd
 sudo chown -c root:www-data /etc/raspap/lighttpd/*.sh
 sudo cp installers/raspapd.service /lib/systemd/system
