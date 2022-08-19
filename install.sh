@@ -38,7 +38,7 @@ sudo lighttpd-enable-mod fastcgi-php
 sudo service lighttpd force-reload
 sudo systemctl restart lighttpd.service
 
-echo Create web APP...
+echo -e "Create web APP..."
 sudo rm -rf /var/www/html
 sudo git clone https://github.com/Elastel/webgui /var/www/html
 
