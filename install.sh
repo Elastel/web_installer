@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 model=$(cat /etc/fw_model)
 
@@ -8,12 +8,32 @@ fi
 
 echo model:$model
 
-echo Installing Dependency Packages...
+echo -e "\r\nInstalling Dependency Packages..."
 sudo apt-get update
 sudo apt-get full-upgrade
-sudo apt-get install lighttpd git hostapd dnsmasq iptables-persistent vnstat qrencode php7.4-cgi libmosquitto-dev 	libsqlite3-dev libcurl4-openssl-dev ifmetric
+sudo apt-get install lighttpd git hostapd dnsmasq iptables-persistent vnstat qrencode php7.4-cgi libmosquitto-dev libsqlite3-dev libcurl4-openssl-dev ifmetric
 
-echo Enabled web server...
+echo -e "Check packages..."
+arr=(lighttpd git hostapd dnsmasq iptables-persistent vnstat qrencode php7.4-cgi libmosquitto-dev libsqlite3-dev libcurl4-openssl-dev ifmetric)
+count=0
+
+for i in ${arr[@]}; do
+	dpkg -s "$i" &> /dev/null
+
+	if [ $? -eq 0 ]; then
+		echo "$i is installed!"
+	else
+		echo "$i is NOT installed!"
+		((count++))
+    fi
+done
+
+if [[ $count > 0 ]]; then
+	echo -e "\r\n\e[31mWarnnning:\e[0mInstallation of the dependency package fails. Check the network or manually install the uninstalled software package."
+	exit 0
+fi
+
+echo -e "Enabled web server..."
 sudo lighttpd-enable-mod fastcgi-php
 sudo service lighttpd force-reload
 sudo systemctl restart lighttpd.service
@@ -90,6 +110,8 @@ sudo iptables -t nat -A POSTROUTING -s 192.168.50.0/24 ! -d 192.168.50.0/24 -j M
 sudo iptables-save | sudo tee /etc/iptables/rules.v4
 
 sleep 1
+
+echo -e "Complete to install, it will reboot system."
 
 sudo systemctl unmask hostapd.service
 sudo systemctl enable hostapd.service
