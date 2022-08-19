@@ -2,6 +2,10 @@
 
 model=$(cat /etc/fw_model)
 
+if [ ! -n "$model" ]; then
+        model="EG500"
+fi
+
 echo model:$model
 
 echo Installing Dependency Packages...
