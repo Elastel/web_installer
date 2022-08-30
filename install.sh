@@ -91,7 +91,7 @@ sudo cp config/config.php /var/www/html/includes/
 sudo cp config/defaults.json /etc/raspap/networking/
 sudo cp EG/$model/etc/config/* /etc/config/
 sudo cp EG/$model/etc/init.d/* /etc/init.d/
-sudo ln -s /etc/init.d/failover /etc/rc5.d/S01failover
+sudo ln -s /etc/init.d/failover /etc/rc5.d/S10failover
 sudo ln -s /etc/init.d/lte /etc/rc5.d/S01lte
 sudo ln -s /etc/init.d/dct /etc/rc5.d/S01dct
 sudo ln -s /etc/init.d/daemon /etc/rc5.d/S10daemon
