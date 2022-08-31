@@ -95,6 +95,10 @@ sudo ln -s /etc/init.d/failover /etc/rc5.d/S10failover
 sudo ln -s /etc/init.d/lte /etc/rc5.d/S10lte
 sudo ln -s /etc/init.d/dct /etc/rc5.d/S10dct
 sudo ln -s /etc/init.d/daemon /etc/rc5.d/S10daemon
+sudo /etc/init.d/dct stop
+sudo /etc/init.d/failover stop
+sudo /etc/init.d/daemon stop
+sudo /etc/init.d/lte stop
 sudo cp EG/$model/sbin/* /sbin/
 sudo cp EG/$model/usr/sbin/* /usr/sbin/
 sudo cp EG/$model/usr/lib/* /usr/lib/
