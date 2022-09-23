@@ -5,7 +5,8 @@ $ cd web_installer
 
 $ sudo apt-get update && sudo apt-get upgrade
 
-$ sudo apt-get install software-properties-common 
+$ sudo apt-get install software-properties-common
+
 $ sudo add-apt-repository ppa:ondrej/php
 
 $ chmod +x install.sh 
