@@ -106,10 +106,10 @@ sudo /etc/init.d/lte stop
 
 sleep 2
 
-sudo cp EG/$model/sbin/* /sbin/
-sudo cp EG/$model/usr/sbin/* /usr/sbin/
-sudo cp EG/$model/usr/lib/* /usr/lib/
-sudo cp EG/$model/usr/local/bin/* /usr/local/bin/
+sudo cp -r EG/$model/sbin/* /sbin/
+sudo cp -r EG/$model/usr/sbin/* /usr/sbin/
+sudo cp -r EG/$model/usr/lib/* /usr/lib/
+sudo cp -r EG/$model/usr/local/bin/* /usr/local/bin/
 sudo systemctl stop systemd-networkd
 sudo systemctl disable systemd-networkd
 sudo cp config/raspap-bridge-br0.netdev /etc/systemd/network/raspap-bridge-br0.netdev
