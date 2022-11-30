@@ -91,17 +91,22 @@ sudo cp config/config.php /var/www/html/includes/
 sudo cp config/defaults.json /etc/raspap/networking/
 sudo cp EG/$model/etc/config/* /etc/config/
 sudo cp EG/$model/etc/init.d/* /etc/init.d/
+sudo rm /etc/rc5.d/S01init-wifi
 sudo rm /etc/rc5.d/S10failover
 sudo rm /etc/rc5.d/S10lte
 sudo rm /etc/rc5.d/S10dct
 sudo rm /etc/rc5.d/S10daemon
+sudo rm /etc/rc5.d/S10ddns
+sudo ln -s /etc/init.d/init-wifi /etc/rc5.d/S01init-wifi
 sudo ln -s /etc/init.d/failover /etc/rc5.d/S10failover
 sudo ln -s /etc/init.d/lte /etc/rc5.d/S10lte
 sudo ln -s /etc/init.d/dct /etc/rc5.d/S10dct
 sudo ln -s /etc/init.d/daemon /etc/rc5.d/S10daemon
+sudo ln -s /etc/init.d/ddns /etc/rc5.d/S10ddns
 sudo /etc/init.d/dct stop
 sudo /etc/init.d/failover stop
 sudo /etc/init.d/lte stop
+sudo /etc/init.d/ddns stop
 
 sleep 2
 
