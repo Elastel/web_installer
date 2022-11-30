@@ -101,12 +101,10 @@ sudo ln -s /etc/init.d/dct /etc/rc5.d/S10dct
 sudo ln -s /etc/init.d/daemon /etc/rc5.d/S10daemon
 sudo /etc/init.d/dct stop
 sudo /etc/init.d/failover stop
-sudo /etc/init.d/daemon stop
 sudo /etc/init.d/lte stop
 
 sleep 2
 
-sudo cp -r EG/$model/sbin/* /sbin/
 sudo cp -r EG/$model/usr/sbin/* /usr/sbin/
 sudo cp -r EG/$model/usr/lib/* /usr/lib/
 sudo cp -r EG/$model/usr/local/bin/* /usr/local/bin/
@@ -131,6 +129,17 @@ sudo iptables -t nat -A POSTROUTING -s 192.168.50.0/24 ! -d 192.168.50.0/24 -j M
 sudo iptables-save | sudo tee /etc/iptables/rules.v4
 
 sleep 1
+
+if [ $model = "EG410" ]; then
+	if [ -e /dev/ttyACM0 ]; then
+		sudo cp EG/$model/usr/sbin/dctd-new /usr/sbin/dctd
+	fi
+
+fi
+
+[ -n "$(pgrep daemond)" ] && {
+    sudo kill -9 $(pgrep daemond) && sudo cp EG/$model/sbin/* /sbin/
+}
 
 echo -e "Complete to install, it will reboot system."
 
