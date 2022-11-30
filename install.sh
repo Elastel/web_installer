@@ -39,7 +39,7 @@ sudo systemctl restart lighttpd.service
 
 echo -e "Create web APP..."
 sudo rm -rf /var/www/html
-sudo git clone https://github.com/Elastel/webgui /var/www/html
+sudo git clone -b EG-develop https://github.com/Elastel/webgui /var/www/html
 
 htmlPath="/var/www/html"
 if [ ! -d "$htmlPath" ]; then
