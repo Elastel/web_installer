@@ -32,6 +32,10 @@ if [[ $count > 0 ]]; then
 	exit 0
 fi
 
+if [ ! -f "/usr/local/sbin/WebTunnelAgent" ]; then
+    curl https://raw.githubusercontent.com/my-devices/agent-installer/master/install.sh | bash
+fi
+
 echo -e "Enabled web server..."
 sudo lighttpd-enable-mod fastcgi-php
 sudo service lighttpd force-reload
@@ -97,12 +101,14 @@ sudo rm /etc/rc5.d/S10lte
 sudo rm /etc/rc5.d/S10dct
 sudo rm /etc/rc5.d/S10daemon
 sudo rm /etc/rc5.d/S10ddns
+sudo rm /etc/rc5.d/S10macchina
 sudo ln -s /etc/init.d/init-wifi /etc/rc5.d/S01init-wifi
 sudo ln -s /etc/init.d/failover /etc/rc5.d/S10failover
 sudo ln -s /etc/init.d/lte /etc/rc5.d/S10lte
 sudo ln -s /etc/init.d/dct /etc/rc5.d/S10dct
 sudo ln -s /etc/init.d/daemon /etc/rc5.d/S10daemon
 sudo ln -s /etc/init.d/ddns /etc/rc5.d/S10ddns
+sudo ln -s /etc/init.d/macchina /etc/rc5.d/S10macchina
 sudo /etc/init.d/dct stop
 sudo /etc/init.d/failover stop
 sudo /etc/init.d/lte stop
