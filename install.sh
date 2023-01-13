@@ -93,8 +93,12 @@ sudo cp config/090_br0.conf /etc/dnsmasq.d/090_br0.conf
 sudo cp config/dhcpcd.conf /etc/dhcpcd.conf
 sudo cp config/config.php /var/www/html/includes/
 sudo cp config/defaults.json /etc/raspap/networking/
-sudo cp EG/$model/etc/config/* /etc/config/
-sudo cp EG/$model/etc/init.d/* /etc/init.d/
+sudo cp -r Elastel/$model/etc/* /etc/
+sleep 1
+sub_mac=$(ifconfig br0 | grep ether | awk '{print $2}' | cut -f 5-6 -d ":" | tr -d ":")
+ssid="$model"_"$sub_mac"
+sed -i "s/ssid.*/ssid=$ssid/" /etc/hostapd/hostapd.conf
+sleep 1
 sudo rm /etc/rc5.d/S01init-wifi
 sudo rm /etc/rc5.d/S10failover
 sudo rm /etc/rc5.d/S10lte
@@ -102,6 +106,7 @@ sudo rm /etc/rc5.d/S10dct
 sudo rm /etc/rc5.d/S10daemon
 sudo rm /etc/rc5.d/S10ddns
 sudo rm /etc/rc5.d/S10macchina
+sleep 1
 sudo ln -s /etc/init.d/init-wifi /etc/rc5.d/S01init-wifi
 sudo ln -s /etc/init.d/failover /etc/rc5.d/S10failover
 sudo ln -s /etc/init.d/lte /etc/rc5.d/S10lte
@@ -109,6 +114,7 @@ sudo ln -s /etc/init.d/dct /etc/rc5.d/S10dct
 sudo ln -s /etc/init.d/daemon /etc/rc5.d/S10daemon
 sudo ln -s /etc/init.d/ddns /etc/rc5.d/S10ddns
 sudo ln -s /etc/init.d/macchina /etc/rc5.d/S10macchina
+sleep 1
 sudo /etc/init.d/dct stop
 sudo /etc/init.d/failover stop
 sudo /etc/init.d/lte stop
@@ -116,9 +122,9 @@ sudo /etc/init.d/ddns stop
 
 sleep 2
 
-sudo cp -r EG/$model/usr/sbin/* /usr/sbin/
-sudo cp -r EG/$model/usr/lib/* /usr/lib/
-sudo cp -r EG/$model/usr/local/bin/* /usr/local/bin/
+sudo cp -r Elastel/$model/usr/sbin/* /usr/sbin/
+sudo cp -r Elastel/$model/usr/lib/* /usr/lib/
+sudo cp -r Elastel/$model/usr/local/bin/* /usr/local/bin/
 sudo systemctl stop systemd-networkd
 sudo systemctl disable systemd-networkd
 sudo cp config/raspap-bridge-br0.netdev /etc/systemd/network/raspap-bridge-br0.netdev
@@ -143,13 +149,13 @@ sleep 1
 
 if [ $model = "EG410" ]; then
 	if [ -e /dev/ttyACM0 ]; then
-		sudo cp EG/$model/usr/sbin/dctd-new /usr/sbin/dctd
+		sudo cp Elastel/$model/usr/sbin/dctd-new /usr/sbin/dctd
 	fi
 
 fi
 
 [ -n "$(pgrep daemond)" ] && {
-    sudo kill -9 $(pgrep daemond) && sudo cp EG/$model/sbin/* /sbin/
+    sudo kill -9 $(pgrep daemond) && sudo cp Elastel/$model/sbin/* /sbin/
 }
 
 echo -e "Complete to install, it will reboot system."
