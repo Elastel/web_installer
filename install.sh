@@ -122,7 +122,12 @@ sudo /etc/init.d/lte stop
 sudo /etc/init.d/ddns stop
 
 sleep 2
-sudo cp -r Elastel/$model/usr/* /usr/
+if [ $bit = "64" ]; then
+	sudo cp -r Elastel/$model/usr/* /usr/
+elif [ $bit = "32" ]; then
+	sudo cp -r Elastel/$model/32/usr/* /usr/
+	
+fi
 sleep 2
 sudo systemctl stop systemd-networkd
 sudo systemctl disable systemd-networkd
