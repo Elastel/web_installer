@@ -121,10 +121,8 @@ sudo /etc/init.d/lte stop
 sudo /etc/init.d/ddns stop
 
 sleep 2
-
-sudo cp -r Elastel/$model/usr/sbin/* /usr/sbin/
-sudo cp -r Elastel/$model/usr/lib/* /usr/lib/
-sudo cp -r Elastel/$model/usr/local/bin/* /usr/local/bin/
+sudo cp -r Elastel/$model/usr/* /usr/
+sleep 2
 sudo systemctl stop systemd-networkd
 sudo systemctl disable systemd-networkd
 sudo cp config/raspap-bridge-br0.netdev /etc/systemd/network/raspap-bridge-br0.netdev
