@@ -126,7 +126,6 @@ if [ $bit = "64" ]; then
 	sudo cp -r Elastel/$model/usr/* /usr/
 elif [ $bit = "32" ]; then
 	sudo cp -r Elastel/$model/32/usr/* /usr/
-	
 fi
 sleep 2
 sudo systemctl stop systemd-networkd
@@ -155,10 +154,13 @@ if [ $model = "EG410" ]; then
 	if [ -e /dev/ttyACM0 ]; then
 		sudo cp Elastel/$model/usr/sbin/dctd-new /usr/sbin/dctd
 	fi
-
 fi
 
-sudo kill -9 $(pgrep daemond) && sudo cp Elastel/$model/sbin/* /sbin/
+if [ $bit = "64" ]; then
+	sudo kill -9 $(pgrep daemond) && sudo cp Elastel/$model/sbin/* /sbin/
+elif [ $bit = "32" ]; then
+	sudo kill -9 $(pgrep daemond) && sudo cp Elastel/$model/32/sbin/* /sbin/
+fi
 
 echo -e "Complete to install, it will reboot system."
 
