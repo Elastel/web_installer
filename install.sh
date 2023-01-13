@@ -33,10 +33,6 @@ if [[ $count > 0 ]]; then
 	exit 0
 fi
 
-if [ ! -f "/usr/local/sbin/WebTunnelAgent" ]; then
-    curl https://raw.githubusercontent.com/my-devices/agent-installer/master/install.sh | bash
-fi
-
 echo -e "Enabled web server..."
 sudo lighttpd-enable-mod fastcgi-php
 sudo service lighttpd force-reload
