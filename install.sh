@@ -154,9 +154,7 @@ if [ $model = "EG410" ]; then
 
 fi
 
-[ -n "$(pgrep daemond)" ] && {
-    sudo kill -9 $(pgrep daemond) && sudo cp Elastel/$model/sbin/* /sbin/
-}
+sudo kill -9 $(pgrep daemond) && sudo cp Elastel/$model/sbin/* /sbin/
 
 echo -e "Complete to install, it will reboot system."
 
