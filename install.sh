@@ -1,6 +1,7 @@
 #!/bin/bash
 
 model=$(cat /etc/fw_model)
+bit=$(getconf LONG_BIT)
 
 if [ ! -n "$model" ]; then
         model="EG500"
