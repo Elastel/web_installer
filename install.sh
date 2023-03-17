@@ -74,6 +74,7 @@ sudo cp installers/*log.sh /etc/raspap/hostapd
 sudo cp installers/service*.sh /etc/raspap/hostapd
 sudo chown -c root:www-data /etc/raspap/hostapd/*.sh
 sudo chmod 750 /etc/raspap/hostapd/*.sh
+sudo cp installers/checkpsw.sh /etc/openvpn/server/
 sudo cp installers/configport.sh /etc/raspap/lighttpd
 sudo chown -c root:www-data /etc/raspap/lighttpd/*.sh
 sudo cp installers/raspapd.service /lib/systemd/system
