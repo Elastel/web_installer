@@ -11,10 +11,10 @@ echo model:$model
 
 echo -e "\r\nInstalling Dependency Packages..."
 sudo apt-get update
-sudo apt-get install git dhcpcd5 lighttpd hostapd dnsmasq iptables-persistent vnstat qrencode php7.4-cgi libmosquitto-dev libsqlite3-dev libcurl4-openssl-dev libjson-c-dev ifmetric wireless-tools bridge-utils
+sudo apt-get install git dhcpcd5 lighttpd hostapd dnsmasq iptables-persistent vnstat qrencode php7.4-cgi libmosquitto-dev libsqlite3-dev libcurl4-openssl-dev libjson-c-dev ifmetric wireless-tools bridge-utils openvpn wireguard
 
 echo -e "\r\nCheck packages..."
-arr=(git dhcpcd5 lighttpd hostapd dnsmasq iptables-persistent vnstat qrencode php7.4-cgi libmosquitto-dev libsqlite3-dev libcurl4-openssl-dev ifmetric wireless-tools bridge-utils)
+arr=(git dhcpcd5 lighttpd hostapd dnsmasq iptables-persistent vnstat qrencode php7.4-cgi libmosquitto-dev libsqlite3-dev libcurl4-openssl-dev ifmetric wireless-tools bridge-utils openvpn wireguard)
 count=0
 
 for i in ${arr[@]}; do
