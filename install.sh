@@ -11,10 +11,10 @@ echo model:$model
 
 echo -e "\r\nInstalling Dependency Packages..."
 sudo apt-get update
-sudo apt-get install git dhcpcd5 lighttpd hostapd dnsmasq iptables-persistent vnstat qrencode php7.4-cgi libmosquitto-dev libsqlite3-dev libcurl4-openssl-dev libjson-c-dev ifmetric wireless-tools bridge-utils openvpn wireguard -y
+sudo apt-get install git dhcpcd5 lighttpd hostapd dnsmasq iptables-persistent vnstat qrencode php-cgi libmosquitto-dev libsqlite3-dev libcurl4-openssl-dev libjson-c-dev ifmetric wireless-tools bridge-utils openvpn wireguard -y
 
 echo -e "\r\nCheck packages..."
-arr=(git dhcpcd5 lighttpd hostapd dnsmasq iptables-persistent vnstat qrencode php7.4-cgi libmosquitto-dev libsqlite3-dev libcurl4-openssl-dev ifmetric wireless-tools bridge-utils openvpn wireguard)
+arr=(git dhcpcd5 lighttpd hostapd dnsmasq iptables-persistent vnstat qrencode php-cgi libmosquitto-dev libsqlite3-dev libcurl4-openssl-dev ifmetric wireless-tools bridge-utils openvpn wireguard)
 count=0
 
 for i in ${arr[@]}; do
@@ -133,8 +133,8 @@ sudo cp config/raspap-br0-member-eth1.network /etc/systemd/network/raspap-br0-me
 
 sleep 1
 
-sudo sed -i -E 's/^session\.cookie_httponly\s*=\s*(0|([O|o]ff)|([F|f]alse)|([N|n]o))\s*$/session.cookie_httponly = 1/' 	/etc/php/7.4/cgi/php.ini
-sudo sed -i -E 's/^;?opcache\.enable\s*=\s*(0|([O|o]ff)|([F|f]alse)|([N|n]o))\s*$/opcache.enable = 1/' 	/etc/php/7.4/cgi/php.ini
+sudo sed -i -E 's/^session\.cookie_httponly\s*=\s*(0|([O|o]ff)|([F|f]alse)|([N|n]o))\s*$/session.cookie_httponly = 1/' 	/etc/php/$(php -v | head -n 1 | cut -d ' ' -f 2 | cut -d '.' -f 1,2)/cgi/php.ini
+sudo sed -i -E 's/^;?opcache\.enable\s*=\s*(0|([O|o]ff)|([F|f]alse)|([N|n]o))\s*$/opcache.enable = 1/' 	/etc/php/$(php -v | head -n 1 | cut -d ' ' -f 2 | cut -d '.' -f 1,2)/cgi/php.ini
 sudo phpenmod opcache
 
 sleep 1
