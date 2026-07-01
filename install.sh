@@ -164,4 +164,8 @@ echo -e "Complete to install, it will reboot system."
 
 sudo systemctl unmask hostapd.service
 sudo systemctl enable hostapd.service
-sudo systemctl reboot
+cd /var/www/html
+git checkout *
+chown -R www-data:www-data /var/www/html
+find /var/www/html -type f -exec dos2unix {} +
+./update &
